@@ -4,7 +4,7 @@ Eight Claude Code skills for the admin work of a one-person business.
 
 Every "best Claude Code skills" list is written for engineers — commit message writers, code reviewers, PR describers. These are for the other half of the job: reading your own numbers, clearing your inbox, deciding things, and finding the file you saved somewhere sensible three months ago.
 
-Free and MIT-licensed. Sample data is included, so you can test all eight in about a minute without wiring anything up.
+Free, MIT-licensed, no signup. Sample data is included, so you can test all eight in about a minute without wiring anything up.
 
 ## Install
 
