@@ -1,0 +1,8 @@
+invoice_no,client,amount,currency,issued,due,status
+INV-041,Harper Design Co,1200.00,USD,2026-07-02,2026-07-16,paid
+INV-042,Ridgeway Consulting,2400.00,USD,2026-07-10,2026-07-24,unpaid
+INV-043,Blue Fern Studio,850.00,USD,2026-07-18,2026-08-01,unpaid
+INV-044,Harper Design Co,1200.00,USD,2026-08-02,2026-08-16,unpaid
+INV-045,Northgate Media,3100.00,USD,2026-08-05,2026-08-19,paid
+INV-046,Blue Fern Studio,600.00,USD,2026-08-20,2026-09-03,unpaid
+INV-047,Ridgeway Consulting,2400.00,USD,2026-08-25,2026-09-08,unpaid

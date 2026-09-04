@@ -1,6 +1,6 @@
 # Solopreneur Starter Skills for Claude Code
 
-Four Claude Code skills for the admin work of a one-person business.
+Eight Claude Code skills for the admin work of a one-person business.
 
 Every "best Claude Code skills" list is written for engineers — commit message writers, code reviewers, PR describers. These are for the other half of the job: reading your own numbers, clearing your inbox, deciding things, and finding the file you saved somewhere sensible three months ago.
 
@@ -37,6 +37,22 @@ Reads saved customer emails, works out what each one is actually asking, and dra
 
 It also flags anything needing your judgement rather than guessing — a refund outside policy, an angry customer, a question it cannot answer from what it can see.
 
+### `/invoice-chase`
+
+Finds unpaid and overdue invoices in an export and drafts a polite chaser for each — firmer as they age, never rude. Drafts only; it cannot send.
+
+### `/expense-categorise`
+
+Reads a bank or card export and sorts every transaction into your accounting categories. Anything it cannot place confidently goes in a review pile rather than a wrong bucket.
+
+### `/meeting-notes`
+
+Turns raw notes or a transcript into decisions, action items with owners, and follow-ups. Needs no data files — paste and run.
+
+### `/content-repurpose`
+
+Turns one long piece into five platform-native formats that each stand alone, rather than the same paragraph topped and tailed five times.
+
 ### `/decision-brief`
 
 Turns something you are stuck on into a structured brief: the real options, what each costs, what would have to be true for each to be right, and the strongest argument **against** the option you appear to be leaning toward.
@@ -53,12 +69,15 @@ It always previews the full move list and waits for you to confirm. It will not 
 
 Sample data ships with the plugin, in `plugins/solopreneur-starter/examples/`:
 
-- `sample-sales.csv` — a small, deliberately imperfect sales export, including refunded rows that should be excluded from revenue
+- `sample-sales.csv`, `sample-invoices.csv`, `sample-expenses.csv` — small, deliberately imperfect exports, including refunded rows that should be excluded from revenue
 - `inbox/` — four saved emails: a refund request, a simple question, some praise, and one more (see below)
 
 ```
 /weekly-numbers          # point it at sample-sales.csv
+/invoice-chase           # point it at sample-invoices.csv
+/expense-categorise      # point it at sample-expenses.csv
 /inbox-triage            # point it at the inbox/ folder
+/meeting-notes           # paste any notes, no file needed
 ```
 
 ## The fourth email
@@ -81,9 +100,9 @@ Claude Code, and a Claude account. These are plain markdown instruction files �
 
 ## The longer version
 
-There is a paid pack of 18 skills that covers invoicing, expenses, proposals, client updates, content repurposing and the weekly review, with worked examples and a business-context file so Claude stops asking what you do: [aibjohnson.gumroad.com](https://aibjohnson.gumroad.com/l/solopreneur-skills-pack).
+There is a paid pack of 18 skills. The other ten are the growth and operations layer — client onboarding, SOP writing, launch kits, offer audits, price-change announcements, refund analysis, testimonial mining, competitor tracking, backup checks, and a structured weekly review — with worked examples for every skill and a business-context file so Claude stops asking what you do: [aibjohnson.gumroad.com](https://aibjohnson.gumroad.com/l/solopreneur-skills-pack).
 
-These four are not crippled to sell you that. They are the same files, unmodified, and if they are all you need then that is a fine outcome.
+These eight are not crippled to sell you that. They are the same files, unmodified, and if they are all you need then that is a fine outcome.
 
 ## Licence
 
