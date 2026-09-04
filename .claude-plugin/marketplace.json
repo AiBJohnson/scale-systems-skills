@@ -10,10 +10,11 @@
       "name": "solopreneur-starter",
       "source": "./plugins/solopreneur-starter",
       "description": "Eight Claude Code skills for running a one-person business: weekly numbers, invoice chasing, expense sorting, inbox triage, meeting notes, content repurposing, decision briefs and a file organiser.",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "author": {
         "name": "BJohnson"
-      }
+      },
+      "homepage": "https://github.com/AiBJohnson/scale-systems-skills"
     }
   ]
 }

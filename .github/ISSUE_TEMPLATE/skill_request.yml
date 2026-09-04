@@ -1,0 +1,31 @@
+name: Skill improvement
+description: Propose a bounded change to an existing public skill.
+title: "[Improvement]: "
+labels:
+  - enhancement
+body:
+  - type: input
+    id: skill
+    attributes:
+      label: Skill
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: User problem
+      description: Describe the concrete failure or friction, not only the desired feature.
+    validations:
+      required: true
+  - type: textarea
+    id: boundary
+    attributes:
+      label: Safety and data boundary
+      description: Explain what the skill must not write, send, disclose or assume.
+    validations:
+      required: true
+  - type: textarea
+    id: fixture
+    attributes:
+      label: Synthetic test case
+      description: Provide a redacted or invented example if practical.

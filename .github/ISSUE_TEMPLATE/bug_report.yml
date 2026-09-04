@@ -1,0 +1,59 @@
+name: Bug report
+description: Report a reproducible skill, fixture or documentation problem using synthetic data.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: Do not include credentials, private customer data or unredacted production exports.
+  - type: dropdown
+    id: install
+    attributes:
+      label: Installation method
+      options:
+        - Marketplace
+        - Manual project install
+        - Manual user install
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Plugin and Claude Code versions
+      placeholder: solopreneur-starter 1.2.0; Claude Code x.y.z
+    validations:
+      required: true
+  - type: input
+    id: skill
+    attributes:
+      label: Skill and exact command
+      placeholder: weekly-numbers; /solopreneur-starter:weekly-numbers
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction steps
+      description: Use an included fixture or a minimal synthetic example.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual result
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Data check
+      options:
+        - label: I removed secrets and real customer data from this report.
+          required: true

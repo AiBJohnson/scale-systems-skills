@@ -1,0 +1,5 @@
+.DS_Store
+.scale-systems-local/
+*.local.csv
+*.local.json
+*.local.txt

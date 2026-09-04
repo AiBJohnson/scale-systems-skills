@@ -1,13 +1,14 @@
 {
   "name": "solopreneur-starter",
   "displayName": "Solopreneur Starter Skills",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Eight Claude Code skills for the admin work of a one-person business: weekly numbers, invoice chasing, expenses, inbox triage, meeting notes, content repurposing, decision briefs, file organising.",
   "author": {
     "name": "BJohnson",
     "url": "https://aibjohnson.gumroad.com/"
   },
   "homepage": "https://aibjohnson.gumroad.com/l/claude-code-starter-skills",
+  "repository": "https://github.com/AiBJohnson/scale-systems-skills",
   "license": "MIT",
   "keywords": [
     "solopreneur",
@@ -15,6 +16,9 @@
     "operations",
     "csv",
     "email",
-    "productivity"
+    "productivity",
+    "claude-code",
+    "small-business",
+    "privacy"
   ]
 }

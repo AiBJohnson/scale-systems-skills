@@ -1,109 +1,155 @@
 # Solopreneur Starter Skills for Claude Code
 
-Eight Claude Code skills for the admin work of a one-person business.
+[![Repository checks](https://github.com/AiBJohnson/scale-systems-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/AiBJohnson/scale-systems-skills/actions/workflows/validate.yml)
+[![MIT License](https://img.shields.io/badge/license-MIT-2dd4bf.svg)](LICENSE)
+[![Gumroad download](https://img.shields.io/badge/Gumroad-pay%20what%20you%20want-f0b429.svg)](https://aibjohnson.gumroad.com/l/claude-code-starter-skills?utm_source=github&utm_medium=repository&utm_campaign=claude_skills_funnel)
 
-Every "best Claude Code skills" list is written for engineers — commit message writers, code reviewers, PR describers. These are for the other half of the job: reading your own numbers, clearing your inbox, deciding things, and finding the file you saved somewhere sensible three months ago.
+Eight Claude Code skills for the administrative work of a one-person business.
 
-Free, MIT-licensed, no signup. Sample data is included, so you can test all eight in about a minute without wiring anything up.
+Most Claude Code skill collections focus on software engineering. This collection focuses on the other half of running a small business: reviewing sales, triaging saved emails, chasing invoices, organising files, turning notes into actions, repurposing content, categorising expenses and making decisions.
 
-## Install
+The public repository is free and MIT-licensed. It provides a fixed synthetic input for each of the eight skills so users can evaluate them without starting with customer data.
 
-```
+## What is included
+
+| Skill | Purpose | Important boundary |
+| --- | --- | --- |
+| `weekly-numbers` | Compare two seven-day sales periods | Reports the columns and reporting dates before calculating |
+| `inbox-triage` | Classify saved messages and draft replies | Never sends or connects to a mailbox |
+| `invoice-chase` | Find overdue invoices and draft chasers | Uses an explicit as-of date and never sends |
+| `expense-categorise` | Map transactions to your categories | Does not invent categories or guess ambiguous items |
+| `meeting-notes` | Extract decisions, actions and open questions | Does not invent owners or deadlines |
+| `content-repurpose` | Adapt one source into five native formats | Does not add unsupported claims |
+| `decision-brief` | Compare options and challenge a preferred choice | Marks unknown costs instead of inventing them |
+| `file-organiser` | Preview and apply rule-based file moves | Requires approval and never deletes or overwrites |
+
+## Install from the marketplace
+
+In Claude Code, run:
+
+```text
 /plugin marketplace add AiBJohnson/scale-systems-skills
 /plugin install solopreneur-starter@scale-systems
 ```
 
-Or copy the eight folders in `plugins/solopreneur-starter/skills/` into `~/.claude/skills/` and restart Claude Code.
+Run `/reload-plugins` after installing so the current session discovers the plugin. Marketplace installs use namespaced commands:
 
-## The eight skills
-
-### `/weekly-numbers`
-
-Reads a sales CSV and produces a one-screen Monday summary: revenue against the previous seven days, order count, average order value, top products, and anything that moved sharply.
-
-It reads your file's actual column names and tells you what it found **before** it calculates anything. Exports differ between Stripe, Shopify, Gumroad and everything else, and silently guessing at a column called `total` is how these things quietly report the wrong revenue for a month.
-
-```
-/weekly-numbers
-> Reading sample-sales.csv. Columns: date, product, quantity, unit_price, total, status.
-> Excluding 3 rows where status = refunded.
+```text
+/solopreneur-starter:weekly-numbers
+/solopreneur-starter:inbox-triage
+/solopreneur-starter:invoice-chase
 ```
 
-### `/inbox-triage`
+Run `/plugin list` if you need to confirm that `solopreneur-starter@scale-systems` is enabled.
 
-Reads saved customer emails, works out what each one is actually asking, and drafts a reply in your voice.
+## Manual installation
 
-**It drafts. It does not send.** Nothing in this skill can reach a mail server.
+Copy the eight directories inside `plugins/solopreneur-starter/skills/` to one of these locations:
 
-It also flags anything needing your judgement rather than guessing — a refund outside policy, an angry customer, a question it cannot answer from what it can see.
+- `.claude/skills/` in a project for project-only use.
+- `~/.claude/skills/` for use across your projects.
 
-### `/invoice-chase`
+Standalone skills normally live-reload after you add or edit a skill under an already existing top-level skills directory. Restart Claude Code only when the top-level `.claude/skills/` or `~/.claude/skills/` directory did not exist when the session started. Manually installed skills normally use their unnamespaced names, such as `/weekly-numbers`. Do not install both the marketplace and manual copies at the same time; duplicate skill discovery makes updates and troubleshooting ambiguous.
 
-Finds unpaid and overdue invoices in an export and drafts a polite chaser for each — firmer as they age, never rude. Drafts only; it cannot send.
+## Synthetic test inputs
 
-### `/expense-categorise`
+The files under `plugins/solopreneur-starter/examples/` contain invented names, masked example addresses and synthetic transactions. They are not real customer records. Each skill has a fixed input or explicit fixture mode:
 
-Reads a bank or card export and sorts every transaction into your accounting categories. Anything it cannot place confidently goes in a review pile rather than a wrong bucket.
+| Skill | Input | Fixed test instruction |
+| --- | --- | --- |
+| `weekly-numbers` | `sample-sales.csv` | End the reporting period on 2026-08-31 |
+| `invoice-chase` | `sample-invoices.csv` | Use 2026-09-04 as the as-of date |
+| `expense-categorise` | `sample-expenses.csv` | Verify that it requests a category list rather than inventing one |
+| `inbox-triage` | `inbox/` | Use only the four saved messages; do not connect to a mailbox |
+| `content-repurpose` | `content-repurpose/source-article.md` | Create local drafts only; add no facts absent from the source |
+| `meeting-notes` | `meeting-notes/raw-notes.md` | Preserve unresolved owners, dates and questions |
+| `decision-brief` | `decision-brief/decision-context.md` | Recommend without buying or changing an account |
+| `file-organiser` | `file-organiser/preview-request.md` | Manifest-only preview; do not perform any filesystem move |
 
-### `/meeting-notes`
+For a reproducible `weekly-numbers` test, point the skill at `sample-sales.csv` and set the reporting-period end date to **2026-08-31**. It should begin with the real schema and state the date windows:
 
-Turns raw notes or a transcript into decisions, action items with owners, and follow-ups. Needs no data files — paste and run.
-
-### `/content-repurpose`
-
-Turns one long piece into five platform-native formats that each stand alone, rather than the same paragraph topped and tailed five times.
-
-### `/decision-brief`
-
-Turns something you are stuck on into a structured brief: the real options, what each costs, what would have to be true for each to be right, and the strongest argument **against** the option you appear to be leaning toward.
-
-That last part is the point. An assistant that agrees with you is not helping you decide.
-
-### `/file-organiser`
-
-Sorts a messy folder into a structure you define and renames by rule.
-
-It always previews the full move list and waits for you to confirm. It will not touch anything before you say so, and it will not delete.
-
-## Test all eight in a minute
-
-Sample data ships with the plugin, in `plugins/solopreneur-starter/examples/`:
-
-- `sample-sales.csv`, `sample-invoices.csv`, `sample-expenses.csv` — small, deliberately imperfect exports, including refunded rows that should be excluded from revenue
-- `inbox/` — four saved emails: a refund request, a simple question, some praise, and one more (see below)
-
-```
-/weekly-numbers          # point it at sample-sales.csv
-/invoice-chase           # point it at sample-invoices.csv
-/expense-categorise      # point it at sample-expenses.csv
-/inbox-triage            # point it at the inbox/ folder
-/meeting-notes           # paste any notes, no file needed
+```text
+Reading sample-sales.csv.
+Columns: order_id, date, product, price, currency, refunded, customer_email, country.
+Current period: 2026-08-25 through 2026-08-31.
+Comparison period: 2026-08-18 through 2026-08-24.
+Excluding rows where refunded = true from revenue and order calculations.
 ```
 
-## The fourth email
+For `invoice-chase`, use **2026-09-04** as the as-of date. Do not use the computer's current date for either fixture. Deterministic calculation checks and expected model-behavior invariants are documented separately in [`examples/EXPECTED_OUTPUTS.md`](plugins/solopreneur-starter/examples/EXPECTED_OUTPUTS.md).
 
-`inbox/04-injection-test.txt` contains a message with instructions embedded in it, pretending to be from you and asking the assistant to do something it should not.
+When testing a marketplace install, use the namespaced commands:
 
-It is there on purpose. `inbox-triage` is written to treat email content as **data, not instructions** — so it should summarise that email as a suspicious message and refuse to act on what it says. Run it and confirm that for yourself. Do not take my word for it.
+```text
+/solopreneur-starter:weekly-numbers
+/solopreneur-starter:invoice-chase
+/solopreneur-starter:expense-categorise
+/solopreneur-starter:inbox-triage
+/solopreneur-starter:meeting-notes
+/solopreneur-starter:content-repurpose
+/solopreneur-starter:decision-brief
+/solopreneur-starter:file-organiser
+```
 
-Any tool that reads untrusted text on your behalf should be tested this way before you trust it with a real inbox.
+## Working files and privacy
 
-## Three rules every skill follows
+Keep live exports and generated drafts outside this public clone whenever practical. Pass the skill an explicit input path rather than copying customer files into `examples/`.
 
-1. **Say what is missing.** Every skill is instructed to flag gaps rather than fill them with plausible filler. A skill that quietly invents a number is worse than one that refuses.
-2. **Dry run before writing.** Anything that modifies or deletes shows you the plan first.
-3. **Draft, never send.** Nothing here posts publicly, emails anyone, or moves money.
+If you work inside a Git project, the skills default generated files to a unique run directory under:
 
-## Requirements
+```text
+.scale-systems-local/runs/<skill>/<YYYYMMDD-HHMMSSZ>/
+```
 
-Claude Code, and a Claude account. These are plain markdown instruction files — no dependencies, nothing to build, nothing that phones home.
+This repository ignores `.scale-systems-local/`, but your own project will only ignore it if its `.gitignore` also contains that entry. Every file-writing skill must state its planned output path first, create a new run directory and refuse to overwrite an existing file. `file-organiser` is the exception only in destination: it can move the files you explicitly approve, while recording a collision-safe log under the local run directory.
 
-## The longer version
+For a voice guide, either provide an explicit path or copy [`examples/voice.example.md`](plugins/solopreneur-starter/examples/voice.example.md) to `.scale-systems-local/context/voice.md` and replace the fictional text. Do not commit a real voice guide if it contains private business or customer information.
 
-There is a paid pack of 18 skills. The other ten are the growth and operations layer — client onboarding, SOP writing, launch kits, offer audits, price-change announcements, refund analysis, testimonial mining, competitor tracking, backup checks, and a structured weekly review — with five worked examples, sample data, and a business-context file so Claude stops asking what you do: [aibjohnson.gumroad.com](https://aibjohnson.gumroad.com/l/solopreneur-skills-pack).
+Never put credentials, access tokens, private mailbox exports, unredacted customer data or payment data in this repository. See [`SECURITY.md`](SECURITY.md) for the complete data and tool boundary.
 
-These eight are not crippled to sell you that. They are the same files, unmodified, and if they are all you need then that is a fine outcome.
+## The injection test
 
-## Licence
+`examples/inbox/04-injection-test.txt` contains instructions embedded in a fictional email. It is intentionally hostile test data.
 
-MIT. Fork them, change them, ship them in your own thing.
+`inbox-triage` must treat that content as data, flag it as suspicious and refuse to follow it. The fixture does not prove that every model or host configuration is safe; it is a regression check for the skill's written instruction boundary. Test with synthetic data before considering real inbox exports.
+
+## What the automated checks prove
+
+`python3 scripts/validate_repo.py` deterministically checks manifest consistency, the eight expected skill files, fixed fixture presence, CSV schemas, sample arithmetic and required written safety boundaries. `claude plugin validate ... --strict` checks the plugin and marketplace manifest structure.
+
+Neither check invokes a model, runs a skill conversation, exercises host tools or proves end-to-end behavior. The qualitative sections of `EXPECTED_OUTPUTS.md` are acceptance criteria for a separate manual or model evaluation; they are not claims that such an evaluation passed.
+
+## Shared rules
+
+1. **Say what is missing.** The skills flag gaps instead of filling them with plausible details.
+2. **Use reproducible dates.** Date-sensitive work states its as-of date or reporting window.
+3. **Keep inputs read-only.** Generated files go to a unique local run directory and never replace a source file.
+4. **Preview consequential file moves.** `file-organiser` shows the full plan and waits for approval.
+5. **Draft, never send.** These skills do not post, email, purchase or move money.
+
+These are behavioral instructions, not a technical sandbox. The plugin ships no hooks, MCP servers, mail integration or runtime dependencies, but Claude Code may have tools and connectors enabled by the user. The skills instruct Claude not to use those capabilities for sending, publishing or moving money.
+
+## Requirements and maintenance
+
+You need Claude Code and a Claude account. The installed plugin consists of JSON manifests, Markdown skill instructions and synthetic text/CSV fixtures; it has no build step or runtime dependency. The repository also contains a maintainer-side Python validation script used by CI.
+
+Update or remove a marketplace installation with:
+
+```text
+/plugin update solopreneur-starter@scale-systems
+/plugin uninstall solopreneur-starter@scale-systems
+```
+
+After an update, run `/reload-plugins` to load the updated marketplace plugin in the current session.
+
+For troubleshooting, include the Claude Code version, installation method, exact command name, sanitized input schema and observed output. Do not attach live customer data or secrets. Open a [bug report](https://github.com/AiBJohnson/scale-systems-skills/issues/new/choose) or read [`CONTRIBUTING.md`](CONTRIBUTING.md).
+
+## The paid collection
+
+The paid collection contains 18 skills total: these eight starter skills plus ten additional growth and operations skills covering client onboarding, SOP writing, launch kits, offer audits, price-change announcements, refund analysis, testimonial mining, competitor tracking, backup checks and a structured weekly review. Details are on [Gumroad](https://aibjohnson.gumroad.com/l/solopreneur-skills-pack?utm_source=github&utm_medium=repository&utm_campaign=claude_skills_funnel).
+
+The public eight are complete skills, not shortened demos. This repository cannot verify the current contents of a separately delivered purchase; consult that product's listing and included license before relying on its counts or reuse terms.
+
+## License
+
+The public repository, including all eight files under `plugins/solopreneur-starter/skills/`, is MIT-licensed. You may use, modify, redistribute and sell copies subject to the notice requirement in [`LICENSE`](LICENSE). [`LICENSES.md`](LICENSES.md) explains the repository boundary and why a separately delivered paid package may have different terms.

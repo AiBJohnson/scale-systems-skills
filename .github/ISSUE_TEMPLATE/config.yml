@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Sensitive security report
+    url: https://aibjohnson.gumroad.com/l/claude-code-starter-skills
+    about: Do not disclose secrets or customer data publicly. Use the creator contact on the product page.
