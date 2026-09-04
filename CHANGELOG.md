@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Add a first-use checklist and a blank plain-prompt comparison rubric, linked from the README and client-work quickstart.
+- Make the sample's chat-only boundaries explicit and distinguish factual review, observed actions, and unknown behavior from an assistant's success claim.
+- Keep all eight skill files, fixtures, licenses, and version 1.3.0 manifests unchanged. These documentation additions do not establish model superiority or customer outcomes.
+
 ## 1.3.0 - 2026-09-04
 
 - Focus the starter on client-work review for freelance web designers and website consultants already using Claude Code.

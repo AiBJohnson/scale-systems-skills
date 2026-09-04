@@ -12,6 +12,8 @@ The public repository is free and MIT-licensed. The eight complete skills are ed
 
 ## Try one client call first
 
+New to this pack? Start with the [first-use checklist](plugins/solopreneur-starter/FIRST-USE-CHECKLIST.md): check prerequisites, choose one task, supply only authorized context, and review facts before reusing the draft.
+
 Follow the [client-work quickstart](plugins/solopreneur-starter/CLIENT-WORK-QUICKSTART.md). It pairs [fictional Birchlight call notes](plugins/solopreneur-starter/examples/client-work/client-call-notes.md) with an [editor-prepared expected example](plugins/solopreneur-starter/examples/client-work/client-call-EXPECTED.md), not a saved model response.
 
 After marketplace installation below, use:
@@ -20,12 +22,15 @@ After marketplace installation below, use:
 /solopreneur-starter:meeting-notes
 Read only plugins/solopreneur-starter/examples/client-work/client-call-notes.md.
 Return the draft in chat. Separate decisions, actions, unresolved questions,
-and promises. Preserve unknown owners and dates. Do not send or create tasks.
+and promises. Preserve unknown owners and dates. Do not send, schedule, publish,
+create tasks, or write files.
 ```
 
 This relative path assumes Claude Code is open in the repository root. From a separate disposable project, supply the exact absolute path to the same synthetic file. For downloaded-folder installation, use `/meeting-notes` without the marketplace prefix.
 
 The expected check is **two decisions, four actions, one unassigned action, and four open questions**. Domain ownership has no assigned action owner. “Late September” is discussion, not an agreed launch date. The sample demonstrates a review target; it does not establish that a model or real customer task passed.
+
+Use the [plain-prompt comparison rubric](plugins/solopreneur-starter/PROMPT-COMPARISON.md) to test the same input with an ordinary prompt and the skill. It records first-answer factual errors, visible unknowns, corrections, setup effort, and action boundaries—not a predetermined winner. Keep your existing method if it works equally well with less effort. An invented commitment or unauthorized action is a stop condition; a polished answer or the assistant's own success claim does not clear it. Record unverifiable behavior as unknown.
 
 No inbox, calendar, or account connection is needed. Test synthetic data first, then a sanitized copy of one task you are permitted to share with your configured model service.
 

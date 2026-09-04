@@ -2,6 +2,8 @@
 
 For freelance web designers and website consultants already using Claude Code. This starter contains eight editable skills. Try one useful job before changing your working routine: turn rough call notes into decisions, actions, and questions you still need to resolve.
 
+New to the pack? Use the short [FIRST-USE-CHECKLIST.md](FIRST-USE-CHECKLIST.md) alongside this walkthrough. Afterwards, [PROMPT-COMPARISON.md](PROMPT-COMPARISON.md) helps you compare the same task with ordinary prompting without assuming the skill wins.
+
 ## Set up a safe first run
 
 Claude Code access is separate. Download and extract this pack, then open its folder in Claude Code. Keep this first run separate from real client files. No inbox, calendar, or account connection is needed.
