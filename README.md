@@ -4,7 +4,7 @@ Eight Claude Code skills for the admin work of a one-person business.
 
 Every "best Claude Code skills" list is written for engineers — commit message writers, code reviewers, PR describers. These are for the other half of the job: reading your own numbers, clearing your inbox, deciding things, and finding the file you saved somewhere sensible three months ago.
 
-Free and MIT-licensed. Sample data is included, so you can test all four in about a minute without wiring anything up.
+Free and MIT-licensed. Sample data is included, so you can test all eight in about a minute without wiring anything up.
 
 ## Install
 
@@ -13,9 +13,9 @@ Free and MIT-licensed. Sample data is included, so you can test all four in abou
 /plugin install solopreneur-starter@scale-systems
 ```
 
-Or copy the four folders in `plugins/solopreneur-starter/skills/` into `~/.claude/skills/` and restart Claude Code.
+Or copy the eight folders in `plugins/solopreneur-starter/skills/` into `~/.claude/skills/` and restart Claude Code.
 
-## The four skills
+## The eight skills
 
 ### `/weekly-numbers`
 
@@ -65,7 +65,7 @@ Sorts a messy folder into a structure you define and renames by rule.
 
 It always previews the full move list and waits for you to confirm. It will not touch anything before you say so, and it will not delete.
 
-## Test all four in a minute
+## Test all eight in a minute
 
 Sample data ships with the plugin, in `plugins/solopreneur-starter/examples/`:
 
@@ -100,7 +100,7 @@ Claude Code, and a Claude account. These are plain markdown instruction files �
 
 ## The longer version
 
-There is a paid pack of 18 skills. The other ten are the growth and operations layer — client onboarding, SOP writing, launch kits, offer audits, price-change announcements, refund analysis, testimonial mining, competitor tracking, backup checks, and a structured weekly review — with worked examples for every skill and a business-context file so Claude stops asking what you do: [aibjohnson.gumroad.com](https://aibjohnson.gumroad.com/l/solopreneur-skills-pack).
+There is a paid pack of 18 skills. The other ten are the growth and operations layer — client onboarding, SOP writing, launch kits, offer audits, price-change announcements, refund analysis, testimonial mining, competitor tracking, backup checks, and a structured weekly review — with five worked examples, sample data, and a business-context file so Claude stops asking what you do: [aibjohnson.gumroad.com](https://aibjohnson.gumroad.com/l/solopreneur-skills-pack).
 
 These eight are not crippled to sell you that. They are the same files, unmodified, and if they are all you need then that is a fine outcome.
 
