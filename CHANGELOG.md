@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.3.0 - 2026-09-04
+
+- Focus the starter on client-work review for freelance web designers and website consultants already using Claude Code.
+- Add a task-first quickstart and a synthetic website-design call with an explicitly editor-prepared expected example; neither is a recorded model run.
+- Add an optional Python installer with no-write previews, explicit project/user/custom scope, exact eight-skill inventory, symlink refusal, and exclusive non-overwriting writes.
+- Include installation, troubleshooting, optional context templates, and target-specific recoverable removal guidance. The installer never copies context or examples.
+- Extend repository checks to cover the client-work fixture, required documentation, and isolated installer preview/conflict/application behavior.
+- Preserve all eight skill files unchanged, their MIT license, marketplace identifiers, and the eight-shared-plus-ten-additional paid distinction.
+- Clarify separate Claude Code access, model-service data handling, and that no superiority, model performance, or customer result has been established.
+
 ## 1.2.0 - 2026-09-04
 
 - Correct the eight-free-plus-ten-additional product count throughout the public repository.

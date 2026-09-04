@@ -1,8 +1,8 @@
 {
   "name": "solopreneur-starter",
-  "displayName": "Solopreneur Starter Skills",
-  "version": "1.2.0",
-  "description": "Eight Claude Code skills for the admin work of a one-person business: weekly numbers, invoice chasing, expenses, inbox triage, meeting notes, content repurposing, decision briefs, file organising.",
+  "displayName": "Client Work Starter",
+  "version": "1.3.0",
+  "description": "Eight complete Claude Code skills for freelance web designers: client-call decisions and actions, invoice drafts, saved-message triage, and supporting review workflows. Human review required.",
   "author": {
     "name": "BJohnson",
     "url": "https://aibjohnson.gumroad.com/"
@@ -19,6 +19,8 @@
     "productivity",
     "claude-code",
     "small-business",
-    "privacy"
+    "privacy",
+    "freelance-web-design",
+    "client-work"
   ]
 }

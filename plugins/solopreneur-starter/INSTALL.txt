@@ -1,0 +1,99 @@
+CLIENT ADMIN STARTER FOR CLAUDE CODE - INSTALL
+=============================================
+
+EIGHT COMPLETE SKILLS. CHOOSE ONE INSTALLATION METHOD.
+
+Before starting:
+- Claude Code must already be available to you; access is not included.
+- Read CLIENT-WORK-QUICKSTART.md. Begin in a disposable project with synthetic data.
+- Inspect /plugin and your existing project/user skill folders. Do not keep the
+  same eight skills installed through multiple scopes or methods.
+- The installer checks only the selected destination. It does not edit Claude
+  settings, disable plugins, copy business context, or inspect every other scope.
+
+OPTION A - SAFE INSTALL FROM THIS DOWNLOAD
+
+Requires Python 3.9+ on macOS, Linux, or WSL. Native Windows is not supported by
+this installer. No packages to install, account access, or network use.
+
+1. Create or choose a disposable project folder using your file manager. It must
+   exist already. Open a terminal in this extracted product folder.
+
+2. Preview the exact eight destination paths. Replace the example project path:
+
+   python3 install_skills.py --project "/absolute/path/to/client-sandbox"
+
+   The default is DRY RUN. Nothing is written. Only the eight skill folders will
+   go inside that project's .claude/skills/. Examples and context stay here.
+
+3. If the preview is correct, repeat with --apply:
+
+   python3 install_skills.py --project "/absolute/path/to/client-sandbox" --apply
+
+   Keep the printed path list. Any existing skill name, including a dangling
+   symlink, blocks installation. Existing data is never merged or overwritten.
+   Do not move or modify the source/target directories while the installer runs.
+
+4. Open Claude Code in the selected project. Type / and check that eight
+   unnamespaced names appear. Restart the session if they are missing.
+
+Other explicit scopes:
+  python3 install_skills.py --user
+  python3 install_skills.py --user --apply
+
+  User scope deliberately installs in ~/.claude/skills for use across projects.
+
+  python3 install_skills.py --destination "/absolute/custom/skills"
+  python3 install_skills.py --destination "/absolute/custom/skills" --apply
+
+  An explicit destination's parent must exist. Use this only when you know how
+  that path is discovered; arbitrary folders are not auto-enabled in Claude Code.
+
+OPTION B - PUBLIC MARKETPLACE INSTALL
+
+In Claude Code, run:
+
+  /plugin marketplace add AiBJohnson/scale-systems-skills
+  /plugin install solopreneur-starter@scale-systems
+  /reload-plugins
+
+Run /plugin list and confirm solopreneur-starter@scale-systems is enabled.
+Marketplace commands include the namespace, for example:
+
+  /solopreneur-starter:meeting-notes
+  /solopreneur-starter:invoice-chase
+
+Do not combine this with a downloaded-folder install of the same eight.
+
+OPTIONAL BUSINESS CONTEXT - NEVER REPLACE AN EXISTING FILE
+
+No context file is needed for the synthetic first run. If you later want reusable
+business context, read context/CLAUDE.md before adopting it. In your chosen project,
+use an editor to create CLAUDE.md only if it does not exist. If it exists, review
+and merge only the relevant non-sensitive facts; preserve all current instructions.
+
+context/voice.md is also optional. Review its fictional example and replace it with
+your own non-sensitive wording. Use an editor/file manager to create a NEW
+.scale-systems-local/context/voice.md in your chosen project only if absent. If a
+file is already there, review it in place instead of copying over it.
+
+These files can be read by Claude Code and sent to your configured model/service.
+Do not put passwords, tokens, or unnecessary client identifiers in them.
+
+UPGRADING, RECOVERY, OR REMOVAL
+
+There is no overwrite/update/uninstall mode. Close the affected Claude Code
+session. Inspect the exact named skill paths in your saved installer output.
+Use a file manager to move only those known added skill folders to a dated backup
+outside every .claude/skills location. Check for custom edits first. Leave the
+parent .claude/skills, all unrelated skills, context files, and project data alone.
+
+Then preview a fresh installation if wanted. Moving a folder back restores that
+version only if the destination is absent. Do not merge over a newer copy.
+
+For marketplace removal, use Claude Code's plugin manager for the exact
+solopreneur-starter@scale-systems entry. The installer does not manage plugins.
+For a partial install or conflicts, see TROUBLESHOOTING.md before trying again.
+
+Public source: https://github.com/AiBJohnson/scale-systems-skills
+Scale Systems - aibjohnson.gumroad.com

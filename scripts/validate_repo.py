@@ -4,9 +4,13 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import json
+import os
 import re
+import subprocess
 import sys
+import tempfile
 from collections import defaultdict
 from datetime import date, timedelta
 from decimal import Decimal
@@ -16,6 +20,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 PLUGIN = ROOT / "plugins" / "solopreneur-starter"
 EXAMPLES = PLUGIN / "examples"
+EXPECTED_VERSION = "1.3.0"
 EXPECTED_SKILLS = {
     "content-repurpose",
     "decision-brief",
@@ -57,8 +62,8 @@ def validate_manifests() -> None:
         fail("plugin name differs between manifests")
     if entries[0].get("version") != plugin.get("version"):
         fail("plugin version differs between manifests")
-    if plugin.get("version") != "1.2.0":
-        fail("expected repaired plugin version 1.2.0")
+    if plugin.get("version") != EXPECTED_VERSION:
+        fail(f"expected plugin version {EXPECTED_VERSION}")
     if plugin.get("repository") != "https://github.com/AiBJohnson/scale-systems-skills":
         fail("plugin repository URL is missing or incorrect")
 
@@ -138,6 +143,109 @@ def validate_fixture_inventory() -> None:
     for phrase in ("manifest-only safety fixture", "do not create directories", "existing destination"):
         if phrase not in organiser:
             fail(f"file-organiser fixture missing safety fact: {phrase!r}")
+
+
+def validate_client_work_example() -> None:
+    notes = (EXAMPLES / "client-work" / "client-call-notes.md").read_text(encoding="utf-8")
+    expected = (EXAMPLES / "client-work" / "client-call-EXPECTED.md").read_text(encoding="utf-8")
+    quickstart = (PLUGIN / "CLIENT-WORK-QUICKSTART.md").read_text(encoding="utf-8")
+    for phrase in (
+        "fictional", "2026-09-14", "America/Chicago", "five pages",
+        "2026-09-17", "2026-09-16", "No action owner or date was agreed",
+        "no launch date was agreed", "authority to give final approval was not confirmed",
+    ):
+        if phrase not in notes:
+            fail(f"client-call input lost a fixed fact or unknown: {phrase!r}")
+    if len(re.findall(r"^- N[1-8]:", notes, flags=re.MULTILINE)) != 8:
+        fail("client-call input must retain exactly eight numbered source notes")
+    for phrase in (
+        "Editor-prepared expected output, not a model-run result",
+        "2 decisions", "4 actions", "1 unassigned action", "4 open questions",
+        "UNASSIGNED", "no date agreed", "not permission to publish",
+    ):
+        if phrase not in expected:
+            fail(f"client-call expected example lost a review target: {phrase!r}")
+    for phrase in (
+        "Claude Code access is separate", "--project", "--apply",
+        "editor-prepared expected example, not a model-run result",
+        "/solopreneur-starter:meeting-notes", "Nothing was sent or scheduled",
+    ):
+        if phrase not in quickstart:
+            fail(f"client-work quickstart lost required boundary: {phrase!r}")
+    for relative in (
+        "INSTALL.txt", "TROUBLESHOOTING.md", "install_skills.py",
+        "context/CLAUDE.md", "context/voice.md",
+    ):
+        if not (PLUGIN / relative).is_file():
+            fail(f"missing linked setup resource: {relative}")
+
+
+def tree_snapshot(root: Path) -> dict:
+    snapshot = {}
+    for path in root.rglob("*"):
+        relative = str(path.relative_to(root))
+        if path.is_symlink():
+            snapshot[relative] = ("symlink", os.readlink(path))
+        elif path.is_dir():
+            snapshot[relative] = ("directory",)
+        else:
+            snapshot[relative] = ("file", hashlib.sha256(path.read_bytes()).hexdigest())
+    return snapshot
+
+
+def validate_installer() -> None:
+    if os.name != "posix":
+        fail("installer checks require macOS, Linux or WSL; native Windows is not supported")
+    with tempfile.TemporaryDirectory(prefix="scale-starter-check-") as temporary:
+        sandbox = Path(temporary).resolve()
+        project = sandbox / "client project"
+        project.mkdir()
+        fake_home = sandbox / "fake-home"
+        fake_home.mkdir()
+        sentinel = sandbox / "unrelated.txt"
+        sentinel.write_bytes(b"Existing user content must not change.\x00")
+        context = project / "CLAUDE.md"
+        context.write_text("Existing project instructions; do not replace.\n", encoding="utf-8")
+        environment = dict(os.environ, HOME=str(fake_home), PYTHONDONTWRITEBYTECODE="1")
+
+        def run(*arguments: str) -> subprocess.CompletedProcess:
+            return subprocess.run(
+                [sys.executable, str(PLUGIN / "install_skills.py"), *arguments],
+                cwd=sandbox, env=environment, capture_output=True, text=True, timeout=20,
+            )
+
+        before = tree_snapshot(sandbox)
+        preview = run("--project", str(project))
+        if preview.returncode or "DRY RUN: 8 skill folders" not in preview.stdout:
+            fail(f"installer preview failed: {preview.stderr or preview.stdout}")
+        if tree_snapshot(sandbox) != before:
+            fail("installer dry run wrote to the temporary project or home")
+
+        installed = run("--project", str(project), "--apply")
+        if installed.returncode:
+            fail(f"installer apply failed: {installed.stderr}")
+        destination = project / ".claude" / "skills"
+        if {path.name for path in destination.iterdir()} != EXPECTED_SKILLS:
+            fail("installer did not create exactly the eight public skill directories")
+        if tree_snapshot(destination) != tree_snapshot(PLUGIN / "skills"):
+            fail("installed skill file bytes differ from the source or include extra files")
+        after = tree_snapshot(sandbox)
+        if any(after.get(path) != value for path, value in before.items()):
+            fail("installer changed an existing temporary-project file")
+        if any(not path.startswith("client project/.claude") for path in set(after) - set(before)):
+            fail("installer wrote outside its explicitly selected project skill scope")
+
+        conflict = run("--project", str(project), "--apply")
+        if conflict.returncode != 1 or tree_snapshot(sandbox) != after:
+            fail("installer did not refuse a repeat-install collision without changing bytes")
+
+        symlink_project = sandbox / "symlink-project"
+        symlink_project.mkdir()
+        (symlink_project / ".claude").symlink_to(fake_home, target_is_directory=True)
+        before_symlink = tree_snapshot(sandbox)
+        refused = run("--project", str(symlink_project), "--apply")
+        if refused.returncode != 1 or tree_snapshot(sandbox) != before_symlink:
+            fail("installer did not refuse a symlink ancestor without writing")
 
 
 def validate_sales_fixture() -> None:
@@ -254,6 +362,8 @@ def main() -> int:
         validate_skills,
         validate_counts_and_docs,
         validate_fixture_inventory,
+        validate_client_work_example,
+        validate_installer,
         validate_sales_fixture,
         validate_invoice_fixture,
         validate_safety_contract,
@@ -262,7 +372,7 @@ def main() -> int:
         for check in checks:
             check()
             print(f"PASS {check.__name__}")
-    except (AssertionError, OSError, ValueError, json.JSONDecodeError) as exc:
+    except (AssertionError, OSError, ValueError, json.JSONDecodeError, subprocess.SubprocessError) as exc:
         print(f"FAIL {exc}", file=sys.stderr)
         return 1
     print(f"PASS all {len(checks)} repository checks")

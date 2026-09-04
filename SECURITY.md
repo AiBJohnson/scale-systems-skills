@@ -6,9 +6,17 @@ Security and safety corrections target the latest version on the default branch.
 
 ## What this plugin can and cannot enforce
 
-The installed plugin contains Markdown instructions and synthetic text/CSV fixtures. It ships no hooks, MCP server, mail client, network integration or dependency installer. That is an inspectable package property, not a guarantee about the Claude Code host.
+The plugin contains Markdown instructions and synthetic text/CSV fixtures. It ships no hooks, MCP server, mail client, network integration, or automatic dependency installation. The optional Python installer only copies the eight skill directories after explicit `--apply`; it uses standard-library filesystem operations and never invokes a model or network service. That is an inspectable package property, not a guarantee about the Claude Code host.
 
 Claude Code may have filesystem, shell, network, browser, email or other connectors enabled by the user. Skill instructions are a behavioral boundary, not a technical sandbox. Review the proposed action and active tools before using any assistant with sensitive data.
+
+Local inputs can be sent to the model/service configured in Claude Code. Review data settings and client permissions rather than treating file-based work as automatically private or offline.
+
+## Optional installer boundary
+
+The installer requires an explicit project, user, or custom destination and defaults to a no-write preview. It refuses symlinks and existing skill paths, never merges or overwrites, and copies no context or examples. It supports Python 3.9+ on macOS, Linux, or WSL, not native Windows. It checks the selected target, not every plugin/discovery scope, and does not constitute an operating-system sandbox.
+
+An interrupted installation may leave new partial folders. Exact created paths are reported for manual, recoverable cleanup. Close the affected Claude Code session, inspect those paths, and move only known newly added skill directories outside discovery; never remove the whole `.claude` or `skills` directory. See [INSTALL.txt](plugins/solopreneur-starter/INSTALL.txt) and [TROUBLESHOOTING.md](plugins/solopreneur-starter/TROUBLESHOOTING.md).
 
 ## Data rules
 

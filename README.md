@@ -1,14 +1,33 @@
-# Solopreneur Starter Skills for Claude Code
+# Client Work Starter for Claude Code
 
 [![Repository checks](https://github.com/AiBJohnson/scale-systems-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/AiBJohnson/scale-systems-skills/actions/workflows/validate.yml)
 [![MIT License](https://img.shields.io/badge/license-MIT-2dd4bf.svg)](LICENSE)
 [![Gumroad download](https://img.shields.io/badge/Gumroad-pay%20what%20you%20want-f0b429.svg)](https://aibjohnson.gumroad.com/l/claude-code-starter-skills?utm_source=github&utm_medium=repository&utm_campaign=claude_skills_funnel)
 
-Eight Claude Code skills for the administrative work of a one-person business.
+Eight Claude Code skills for freelance web designers and website consultants already using Claude Code.
 
-Most Claude Code skill collections focus on software engineering. This collection focuses on the other half of running a small business: reviewing sales, triaging saved emails, chasing invoices, organising files, turning notes into actions, repurposing content, categorising expenses and making decisions.
+Start with one client call: turn rough notes into decisions, action owners, and questions you still need to resolve. Then try invoice-follow-up drafts or saved-message triage if those tasks fit your work. You provide the source information, review the result, and decide what to share.
 
-The public repository is free and MIT-licensed. It provides a fixed synthetic input for each of the eight skills so users can evaluate them without starting with customer data.
+The public repository is free and MIT-licensed. The eight complete skills are editable instruction files, not a client portal, CRM, payment service, or autonomous business. Claude Code access is separate. There is no proven superiority over a plain prompt or another free resource; use the examples to decide whether the structure helps your own work.
+
+## Try one client call first
+
+Follow the [client-work quickstart](plugins/solopreneur-starter/CLIENT-WORK-QUICKSTART.md). It pairs [fictional Birchlight call notes](plugins/solopreneur-starter/examples/client-work/client-call-notes.md) with an [editor-prepared expected example](plugins/solopreneur-starter/examples/client-work/client-call-EXPECTED.md), not a saved model response.
+
+After marketplace installation below, use:
+
+```text
+/solopreneur-starter:meeting-notes
+Read only plugins/solopreneur-starter/examples/client-work/client-call-notes.md.
+Return the draft in chat. Separate decisions, actions, unresolved questions,
+and promises. Preserve unknown owners and dates. Do not send or create tasks.
+```
+
+This relative path assumes Claude Code is open in the repository root. From a separate disposable project, supply the exact absolute path to the same synthetic file. For downloaded-folder installation, use `/meeting-notes` without the marketplace prefix.
+
+The expected check is **two decisions, four actions, one unassigned action, and four open questions**. Domain ownership has no assigned action owner. “Late September” is discussion, not an agreed launch date. The sample demonstrates a review target; it does not establish that a model or real customer task passed.
+
+No inbox, calendar, or account connection is needed. Test synthetic data first, then a sanitized copy of one task you are permitted to share with your configured model service.
 
 ## What is included
 
@@ -42,14 +61,30 @@ Run `/reload-plugins` after installing so the current session discovers the plug
 
 Run `/plugin list` if you need to confirm that `solopreneur-starter@scale-systems` is enabled.
 
-## Manual installation
+## Downloaded-folder alternative: preview before applying
 
-Copy the eight directories inside `plugins/solopreneur-starter/skills/` to one of these locations:
+The optional installer needs Python 3.9+ on macOS, Linux, or WSL; native Windows is not supported by its symlink-safe copy mechanism. The marketplace route above does not require this installer.
 
-- `.claude/skills/` in a project for project-only use.
-- `~/.claude/skills/` for use across your projects.
+In a terminal, enter the plugin directory. Replace the example project path with an **existing** disposable project folder:
 
-Standalone skills normally live-reload after you add or edit a skill under an already existing top-level skills directory. Restart Claude Code only when the top-level `.claude/skills/` or `~/.claude/skills/` directory did not exist when the session started. Manually installed skills normally use their unnamespaced names, such as `/weekly-numbers`. Do not install both the marketplace and manual copies at the same time; duplicate skill discovery makes updates and troubleshooting ambiguous.
+```sh
+cd plugins/solopreneur-starter
+python3 install_skills.py --project "/absolute/path/to/client-sandbox"
+```
+
+This default dry run lists the exact eight target folders and writes nothing. Inspect the path list, then explicitly apply:
+
+```sh
+python3 install_skills.py --project "/absolute/path/to/client-sandbox" --apply
+```
+
+Only the eight skill folders are copied into that project's `.claude/skills/`. The installer refuses all existing skill paths, symlinks, and unexpected source contents; it never merges, overwrites, copies context/examples, or changes settings. Keep the exact path list for recovery. An I/O error can leave new partial folders; [troubleshooting](plugins/solopreneur-starter/TROUBLESHOOTING.md) explains how to inspect and recover only those specific additions.
+
+Use `--user` instead of `--project ...` only for deliberate user-wide installation in `~/.claude/skills/`. Advanced users can select `--destination "/absolute/custom/skills"` when its parent exists; arbitrary directories are not automatically discovered. See [INSTALL.txt](plugins/solopreneur-starter/INSTALL.txt) for the exact scope, optional context, upgrade, and removal steps.
+
+Standalone skills normally live-reload under an already existing top-level skills directory. Open Claude Code in the intended project and type `/`; restart the session if the names are missing, especially when the skills directory was created during that session. Downloaded-folder commands are normally unnamespaced, such as `/meeting-notes`.
+
+Do not keep marketplace and downloaded copies of the same eight, or competing project/user copies, installed together. The installer checks only the selected destination, not all discovery scopes. Inspect and preserve existing custom edits before moving any known prior copy outside skill discovery.
 
 ## Synthetic test inputs
 
@@ -103,7 +138,9 @@ If you work inside a Git project, the skills default generated files to a unique
 
 This repository ignores `.scale-systems-local/`, but your own project will only ignore it if its `.gitignore` also contains that entry. Every file-writing skill must state its planned output path first, create a new run directory and refuse to overwrite an existing file. `file-organiser` is the exception only in destination: it can move the files you explicitly approve, while recording a collision-safe log under the local run directory.
 
-For a voice guide, either provide an explicit path or copy [`examples/voice.example.md`](plugins/solopreneur-starter/examples/voice.example.md) to `.scale-systems-local/context/voice.md` and replace the fictional text. Do not commit a real voice guide if it contains private business or customer information.
+For optional context, inspect [`context/CLAUDE.md`](plugins/solopreneur-starter/context/CLAUDE.md) and [`context/voice.md`](plugins/solopreneur-starter/context/voice.md). Use an editor to create an absent destination or carefully merge selected non-sensitive facts into an existing one; never replace your project's `CLAUDE.md` or voice guide with an example. [`examples/voice.example.md`](plugins/solopreneur-starter/examples/voice.example.md) is another fictional reference, not a real customer voice.
+
+Local source files may be sent to the model or service configured in Claude Code. “Local files” does not mean “never leaves your computer.” Check your environment's data settings and client permissions; do not commit private business or customer information.
 
 Never put credentials, access tokens, private mailbox exports, unredacted customer data or payment data in this repository. See [`SECURITY.md`](SECURITY.md) for the complete data and tool boundary.
 
@@ -115,7 +152,7 @@ Never put credentials, access tokens, private mailbox exports, unredacted custom
 
 ## What the automated checks prove
 
-`python3 scripts/validate_repo.py` deterministically checks manifest consistency, the eight expected skill files, fixed fixture presence, CSV schemas, sample arithmetic and required written safety boundaries. `claude plugin validate ... --strict` checks the plugin and marketplace manifest structure.
+`python3 scripts/validate_repo.py` deterministically checks manifest consistency, the eight expected skill files, fixed fixture presence, CSV schemas, sample arithmetic, client-work example facts, and required written safety boundaries. It also checks installer preview/conflict/application behavior in a disposable temporary project; it does not use your real `~/.claude` directory. `claude plugin validate ... --strict` checks the plugin and marketplace manifest structure.
 
 Neither check invokes a model, runs a skill conversation, exercises host tools or proves end-to-end behavior. The qualitative sections of `EXPECTED_OUTPUTS.md` are acceptance criteria for a separate manual or model evaluation; they are not claims that such an evaluation passed.
 
@@ -131,7 +168,7 @@ These are behavioral instructions, not a technical sandbox. The plugin ships no 
 
 ## Requirements and maintenance
 
-You need Claude Code and a Claude account. The installed plugin consists of JSON manifests, Markdown skill instructions and synthetic text/CSV fixtures; it has no build step or runtime dependency. The repository also contains a maintainer-side Python validation script used by CI.
+You need your own Claude Code access; any applicable account or model-service cost is separate. The marketplace skill runtime consists of JSON manifests, Markdown instructions, and synthetic text/CSV fixtures, with no build step or runtime dependency. The optional installer and maintainer validation script use standard-library Python; the installer requires Python 3.9+ on macOS, Linux, or WSL. Neither runs automatically when a skill is used.
 
 Update or remove a marketplace installation with:
 
@@ -146,7 +183,7 @@ For troubleshooting, include the Claude Code version, installation method, exact
 
 ## The paid collection
 
-The paid collection contains 18 skills total: these eight starter skills plus ten additional growth and operations skills covering client onboarding, SOP writing, launch kits, offer audits, price-change announcements, refund analysis, testimonial mining, competitor tracking, backup checks and a structured weekly review. Details are on [Gumroad](https://aibjohnson.gumroad.com/l/solopreneur-skills-pack?utm_source=github&utm_medium=repository&utm_campaign=claude_skills_funnel).
+The paid collection contains 18 skills total: these eight starter skills plus ten additional workflows covering client onboarding, SOP writing, a structured weekly review, offer audits, price-change drafts, launch kits, refund analysis, testimonial permission drafts, one-time competitor comparison, and read-only backup screening. It includes eighteen guided walkthroughs and additional examples; it is still instructions and review aids, not hosted automation. Details are on [Gumroad](https://aibjohnson.gumroad.com/l/solopreneur-skills-pack?utm_source=github&utm_medium=repository&utm_campaign=claude_skills_funnel).
 
 The public eight are complete skills, not shortened demos. This repository cannot verify the current contents of a separately delivered purchase; consult that product's listing and included license before relying on its counts or reuse terms.
 

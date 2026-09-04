@@ -7,7 +7,8 @@ Unless a file says otherwise, every file committed to this public repository is 
 - all eight `plugins/solopreneur-starter/skills/*/SKILL.md` files;
 - the plugin and marketplace manifests;
 - synthetic examples and expected-output documentation;
-- repository documentation and maintainer validation files.
+- repository documentation and maintainer validation files;
+- the optional installer and the context templates published in this repository.
 
 The MIT License permits use, copying, modification, publication, distribution, sublicensing and sale, provided its copyright and permission notice is included in copies or substantial portions.
 
