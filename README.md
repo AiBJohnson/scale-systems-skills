@@ -2,7 +2,7 @@
 
 [![Repository checks](https://github.com/AiBJohnson/scale-systems-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/AiBJohnson/scale-systems-skills/actions/workflows/validate.yml)
 [![MIT License](https://img.shields.io/badge/license-MIT-2dd4bf.svg)](LICENSE)
-[![Gumroad download](https://img.shields.io/badge/Gumroad-pay%20what%20you%20want-f0b429.svg)](https://aibjohnson.gumroad.com/l/claude-code-starter-skills?utm_source=github&utm_medium=repository&utm_campaign=claude_skills_funnel)
+[![Gumroad download](https://img.shields.io/badge/Gumroad-pay%20what%20you%20want-f0b429.svg)](https://aibjohnson.gumroad.com/l/claude-code-starter-skills?utm_source=github&utm_medium=repository&utm_campaign=client_work_v1)
 
 Eight Claude Code skills for freelance web designers and website consultants already using Claude Code.
 
@@ -183,7 +183,7 @@ For troubleshooting, include the Claude Code version, installation method, exact
 
 ## The paid collection
 
-The paid collection contains 18 skills total: these eight starter skills plus ten additional workflows covering client onboarding, SOP writing, a structured weekly review, offer audits, price-change drafts, launch kits, refund analysis, testimonial permission drafts, one-time competitor comparison, and read-only backup screening. It includes eighteen guided walkthroughs and additional examples; it is still instructions and review aids, not hosted automation. Details are on [Gumroad](https://aibjohnson.gumroad.com/l/solopreneur-skills-pack?utm_source=github&utm_medium=repository&utm_campaign=claude_skills_funnel).
+The paid collection contains 18 skills total: these eight starter skills plus ten additional workflows covering client onboarding, SOP writing, a structured weekly review, offer audits, price-change drafts, launch kits, refund analysis, testimonial permission drafts, one-time competitor comparison, and read-only backup screening. It includes eighteen guided walkthroughs and additional examples; it is still instructions and review aids, not hosted automation. Details are on [Gumroad](https://aibjohnson.gumroad.com/l/solopreneur-skills-pack?utm_source=github&utm_medium=repository&utm_campaign=client_work_v1).
 
 The public eight are complete skills, not shortened demos. This repository cannot verify the current contents of a separately delivered purchase; consult that product's listing and included license before relying on its counts or reuse terms.
 
