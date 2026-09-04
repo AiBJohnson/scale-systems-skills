@@ -1,0 +1,19 @@
+{
+  "name": "scale-systems",
+  "owner": {
+    "name": "BJohnson",
+    "url": "https://aibjohnson.gumroad.com/"
+  },
+  "description": "Claude Code skills for running a one-person business \u2014 operations, not engineering.",
+  "plugins": [
+    {
+      "name": "solopreneur-starter",
+      "source": "./plugins/solopreneur-starter",
+      "description": "Four Claude Code skills for running a one-person business: weekly numbers from a CSV, inbox triage, decision briefs, and a file organiser.",
+      "version": "1.0.0",
+      "author": {
+        "name": "BJohnson"
+      }
+    }
+  ]
+}

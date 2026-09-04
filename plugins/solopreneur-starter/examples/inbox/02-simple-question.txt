@@ -1,0 +1,8 @@
+From: marcus@example.com
+Subject: does this work on Windows?
+
+Quick one before I buy — I'm on Windows 11, not Mac. Does the toolkit work
+the same or is it Mac only?
+
+Thanks
+Marcus

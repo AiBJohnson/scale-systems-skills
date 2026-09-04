@@ -1,0 +1,21 @@
+order_id,date,product,price,currency,refunded,customer_email,country
+1001,2026-08-03,Starter Pack,29.00,USD,false,a***@example.com,US
+1002,2026-08-04,Pro Bundle,99.00,USD,false,b***@example.com,GB
+1003,2026-08-05,Starter Pack,29.00,USD,true,c***@example.com,US
+1004,2026-08-07,Templates Vol 1,19.00,USD,false,d***@example.com,CA
+1005,2026-08-09,Pro Bundle,99.00,USD,false,e***@example.com,US
+1006,2026-08-11,Starter Pack,29.00,USD,false,f***@example.com,AU
+1007,2026-08-12,Templates Vol 1,19.00,USD,false,g***@example.com,US
+1008,2026-08-14,Pro Bundle,99.00,USD,false,h***@example.com,DE
+1009,2026-08-15,Starter Pack,29.00,USD,false,i***@example.com,US
+1010,2026-08-16,Coaching Call,150.00,USD,false,j***@example.com,US
+1011,2026-08-18,Starter Pack,29.00,USD,false,k***@example.com,GB
+1012,2026-08-19,Templates Vol 1,19.00,USD,false,l***@example.com,US
+1013,2026-08-21,Pro Bundle,99.00,USD,false,m***@example.com,US
+1014,2026-08-22,Starter Pack,29.00,USD,false,n***@example.com,NL
+1015,2026-08-24,Pro Bundle,99.00,USD,false,o***@example.com,US
+1016,2026-08-25,Starter Pack,29.00,USD,false,p***@example.com,US
+1017,2026-08-27,Coaching Call,150.00,USD,false,q***@example.com,US
+1018,2026-08-28,Templates Vol 1,19.00,USD,true,r***@example.com,ES
+1019,2026-08-30,Pro Bundle,99.00,USD,false,s***@example.com,US
+1020,2026-08-31,Starter Pack,29.00,USD,false,t***@example.com,US
